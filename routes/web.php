@@ -20,4 +20,5 @@ Route::get('logout', 'IndexController@logout');
 
 Route::prefix('dashboard')->middleware('admin')->group(function(){
     Route::get('/', 'IndexController@dashboard')->name('dashboard');
+
 });

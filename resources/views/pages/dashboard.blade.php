@@ -1,6 +1,6 @@
 @extends('layout')
-@section('header')
-
+@section('dashboard')
+    active
 @endsection
 @section('content')
     <!-- Page Heading -->

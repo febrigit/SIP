@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
+use Auth;
+
 class IndexController extends Controller
 {
     public function login(Request $request)
@@ -12,7 +14,7 @@ class IndexController extends Controller
         $akun = User::select('email')->where('email', $request->email)->first();
         if($akun == true)
         {
-            if (Auth::user()->attempt(['email' => $request->email, 'password' => $request->password]))
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
             {
                 return redirect()->route('dashboard');
             } else {
@@ -31,6 +33,6 @@ class IndexController extends Controller
 
     public function dashboard()
     {
-
+        return view('pages.dashboard');
     }
 }

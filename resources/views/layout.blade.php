@@ -27,6 +27,27 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @if (session('status'))
+                                    <div class="alert alert-success mb-3" role="alert">
+                                        {{ session('status') }}
+                                    </div>
+                                @elseif (session('alert'))
+                                    <div class="alert alert-info mb-3" role="alert">
+                                        {{ session('alert') }}
+                                    </div>
+                                @elseif (session('danger'))
+                                    <div class="alert alert-danger mb-3" role="alert">
+                                        {{ session('danger') }}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @yield('content')
             </div>
             <!-- /.container-fluid -->

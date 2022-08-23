@@ -46,9 +46,9 @@
                                 <form method="POST" action="{{url('dashboard/pengguna/'.$item->id)}}">
                                     @csrf
                                     @method('DELETE')
-                                    <button  class="btn btn-danger">YES</button>
+                                    <button  class="btn btn-danger">Ya</button>
                                 </form>
-                                <button type="button" class="btn btn-warning" data-dismiss="modal">NO, CANCEL</button>
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">Tidak, batal</button>
                             </div>
                         </div>
                     </div>

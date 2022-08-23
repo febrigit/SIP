@@ -20,8 +20,8 @@ class UserController extends Controller
         $data = User::orderBy('id', 'desc');
         return DataTables::of($data)
             ->addColumn('action', function ($data){
-                $edit = '<a class="btn btn-warning" href="'.url('dashboard/pengguna/'.$data->id.'/edit').'">edit</a>';
-                $delete = '<a class="btn btn-danger" data-toggle="modal" data-target="#delete'.$data->id.'">delete</a>';
+                $edit = '<a class="btn btn-warning" href="'.url('dashboard/pengguna/'.$data->id.'/edit').'">UBAH</a>';
+                $delete = '<a class="btn btn-danger" data-toggle="modal" data-target="#delete'.$data->id.'">HAPUS</a>';
                 return '<div class="btn btn-group">'.$edit.$delete.'</div>';
             })
             ->rawColumns(['action'])

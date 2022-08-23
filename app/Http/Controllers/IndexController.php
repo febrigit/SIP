@@ -14,6 +14,11 @@ class IndexController extends Controller
         $akun = User::select('email')->where('email', $request->email)->first();
         if($akun == true)
         {
+            if($akun->is_delete == 1)
+            {
+                return redirect()->back()->withNotif("Akun anda sudah dihapus");
+            }
+
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
             {
                 return redirect()->route('dashboard');

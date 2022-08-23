@@ -17,7 +17,7 @@ class UserController extends Controller
 
     public function get_pengguna()
     {
-        $data = User::orderBy('id', 'desc');
+        $data = User::where('is_delete', 0)->orderBy('id', 'desc');
         return DataTables::of($data)
             ->addColumn('action', function ($data){
                 $edit = '<a class="btn btn-warning" href="'.url('dashboard/pengguna/'.$data->id.'/edit').'">UBAH</a>';

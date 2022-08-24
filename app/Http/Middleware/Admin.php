@@ -19,7 +19,7 @@ class Admin
         if(Auth::check())
             return $next($request);
         else{
-            return redirect()->redirect('/');
+            return redirect('/');
         }
     }
 }

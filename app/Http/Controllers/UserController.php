@@ -35,7 +35,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        User::where('id', $id)->delete();
+        User::where('id', $id)->update(['is_delete'=>1]);
         return redirect()->back()->withAlert('Pengguna dihapus');
     }
 

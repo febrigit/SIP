@@ -21,6 +21,7 @@ Route::get('logout', 'IndexController@logout');
 Route::prefix('dashboard')->middleware('admin')->group(function(){
     Route::get('/', 'IndexController@dashboard')->name('dashboard');
 
-    Route::get('/get-pengguna', 'UserController@get_pengguna')->name('get.pengguna');
     Route::resource('/pengguna', 'UserController');
+    Route::resource('/division', 'DivisionController');
+    // Route::get('/get-pengguna', 'UserController@get_pengguna')->name('get.pengguna');
 });

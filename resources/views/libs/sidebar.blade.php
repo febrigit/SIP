@@ -12,7 +12,7 @@
     <li class="nav-item @yield('dashboard')">
         <a class="nav-link" href="{{route('dashboard')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>DASHBOARD</span>
+            <span>Dashboard</span>
         </a>
     </li>
 
@@ -21,13 +21,20 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        PENGATURAN
+        Pengaturan
     </div>
 
     <li class="nav-item @yield('pengguna')">
         <a class="nav-link" href="{{route('pengguna.index')}}">
             <i class="fas fa-fw fa-users"></i>
-            <span>PENGGUNA</span>
+            <span>Pengguna</span>
+        </a>
+    </li>
+
+    <li class="nav-item @yield('division')">
+        <a class="nav-link" href="{{route('division.index')}}">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Divisi</span>
         </a>
     </li>
 

@@ -1,5 +1,5 @@
 @extends('layout')
-@section('pengguna')
+@section('division')
     active
 @endsection
 @section('header')
@@ -9,8 +9,8 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row mb-3">
-                <div class="col-md-4"><h5 class="m-0">Daftar Pengguna</h5></div>
-                <div class="col-md-8"><a href="{{route('pengguna.create')}}" class="btn btn-primary float-right">Tambah Pengguna</a></div>
+                <div class="col-md-4"><h5 class="m-0">Daftar Divisi</h5></div>
+                <div class="col-md-8"><a href="{{route('division.create')}}" class="btn btn-primary float-right">Tambah Divisi</a></div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -20,10 +20,8 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>Kode</th>
                                             <th>Nama</th>
-                                            <th>Email</th>
-                                            <th>Divisi</th>
-                                            <th>Role</th>
                                             <th>...</th>
                                         </tr>
                                     </thead>
@@ -31,10 +29,8 @@
                                         @foreach($datas as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->code  }}</td>
                                                 <td>{{ $item->name  }}</td>
-                                                <td>{{ $item->email  }}</td>
-                                                <td>{{ $item->division_code  }}</td>
-                                                <td>{{ $item->role  }}</td>
                                                 <td>
                                                     <div class="btn btn-group p-0">
                                                         <a class="btn btn-warning btn-sm" href="{{ url('dashboard/division/'.$item->id.'/edit') }}">Edit</a>
@@ -47,11 +43,11 @@
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Hapus pengguna "{{$item->name}}"</h4>
+                                                            <h4 class="modal-title">Hapus Divisi "{{$item->name}}"</h4>
                                                         </div>
-                                                        <div class="modal-body">Kamu yakin ingin menghapus pengguna ini?</div>
+                                                        <div class="modal-body">Kamu yakin ingin menghapus division ini?</div>
                                                         <div class="modal-footer">
-                                                            <form method="POST" action="{{url('dashboard/pengguna/'.$item->id)}}">
+                                                            <form method="POST" action="{{url('dashboard/division/'.$item->id)}}">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button  class="btn btn-danger">Ya</button>

@@ -1,8 +1,8 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard')}}">
-        <div class="sidebar-brand-text mx-3">EAUDIT PMLI</div>
+    <a class="sidebar-brand d-flex align-items-center justify-content-left" href="{{route('dashboard')}}">
+        <div class="sidebar-brand-text mx-3">PROJECT MANAGEMENT PLAN</div>
     </a>
 
     <!-- Divider -->
@@ -24,17 +24,38 @@
         Pengaturan
     </div>
 
-    <li class="nav-item @yield('pengguna')">
-        <a class="nav-link" href="{{route('pengguna.index')}}">
+    <li class="nav-item @yield('user')">
+        <a class="nav-link" href="{{route('user.index')}}">
             <i class="fas fa-fw fa-users"></i>
             <span>Pengguna</span>
         </a>
     </li>
 
-    <li class="nav-item @yield('division')">
-        <a class="nav-link" href="{{route('division.index')}}">
-            <i class="fas fa-fw fa-users"></i>
-            <span>Divisi</span>
+    <li class="nav-item @yield('coa')">
+        <a class="nav-link" href="{{route('coa.index')}}">
+            <i class="fas fa-fw fa-list"></i>
+            <span>Chart Of Account</span>
+        </a>
+    </li>
+
+    <li class="nav-item @yield('bank-account')">
+        <a class="nav-link" href="{{route('bank-account.index')}}">
+            <i class="fas fa-fw fa-list"></i>
+            <span>Akun Bank</span>
+        </a>
+    </li>
+
+    <li class="nav-item @yield('funding')">
+        <a class="nav-link" href="{{route('funding.index')}}">
+            <i class="fas fa-fw fa-list"></i>
+            <span>Donatur</span>
+        </a>
+    </li>
+
+    <li class="nav-item @yield('program')">
+        <a class="nav-link" href="{{route('program.index')}}">
+            <i class="fas fa-fw fa-list"></i>
+            <span>Program</span>
         </a>
     </li>
 

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
 use App\User;
-use App\Model\Division;
+use DB;
 
 
 class UserController extends Controller
@@ -16,92 +16,54 @@ class UserController extends Controller
     public function index()
     {
         $datas = User::get();
-        return view('pages.pengguna.index', compact('datas'));
+        return view('pages.user.index', compact('datas'));
     }
-
-    // public function get_pengguna()
-    // {
-    //     $data = User::whereNull('deleted_at')->orderBy('id', 'desc');
-    //     return DataTables::of($data)
-    //         ->addColumn('action', function ($data){
-    //             $edit = '<a class="btn btn-warning btn-sm" href="'.url('dashboard/pengguna/'.$data->id.'/edit').'">Edit</a>';
-    //             $delete = '<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete'.$data->id.'">Hapus</a>';
-    //             return '<div class="btn btn-group">'.$edit.$delete.'</div>';
-    //         })
-    //         ->rawColumns(['action'])
-    //         ->make(true);
-    // }
 
     public function create()
     {
         $data = new User();
-        $division = Division::get();
-        return view('pages.pengguna.form', compact('data', 'division'));
-    }
-
-    public function destroy($id)
-    {
-        User::where('id', $id)->delete();
-        return redirect()->back()->withAlert('Pengguna dihapus');
-    }
-
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|max:150',
-            'name' => 'required|max:255',
-            'password' => 'required|max:255',
-            'role' => 'required',
-            'division_code' => 'required',
-        ]);
-
-        if ($validator->fails())
-        {
-            $messages = '';
-            foreach ($validator->getMessageBag()->toArray() as $key => $value)
-            {
-                $messages .= $value[0] .' ';
-            }
-            return redirect()->back()->withDanger($messages);
-        }
-
-        $simpan = new User;
-        $simpan->name = $request->name;
-        $simpan->email = $request->email;
-        $simpan->password = Hash::make($request->password);
-        $simpan->role = $request->role;
-        $simpan->division_code = $request->division_code;
-        $simpan->remember_token = Hash::make($request->password);
-        $simpan->save();
-        return redirect()->route('pengguna.index')->withAlert('Pengguna berhasil disimpan');
+        return view('pages.user.form', compact('data'));
     }
 
     public function edit($id)
     {
         $data = User::find($id);
-        $division = Division::get();
-        return view('pages.pengguna.form', compact('data', 'division'));
+        return view('pages.user.form', compact('data'));
+    }
+
+    public function show($id)
+    {
+        $data = User::find($id);
+        return view('pages.user.detail', compact('data'));
+    }
+
+    public function destroy($id)
+    {
+        User::where('id', $id)->delete();
+        return redirect()->back()->withAlert('Data dihapus');
+    }
+
+    public function store(Request $request)
+    {
+        $validator = $this->validator($request);
+        if ($validator['status'] == 'error') return redirect()->back()->withDanger($validator['message']);
+
+        $simpan = new User;
+        $simpan->name = $request->name;
+        $simpan->email = $request->email;
+        $simpan->username = $request->username;
+        $simpan->password = Hash::make($request->password);
+        $simpan->role = $request->role;
+        $simpan->no_telp = $request->no_telp;
+        $simpan->remember_token = Hash::make($request->password);
+        $simpan->save();
+        return redirect()->route('user.index')->withAlert('Data berhasil disimpan');
     }
 
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|max:150',
-            'name' => 'required|max:255',
-            'password' => 'max:255',
-            'role' => 'required',
-            'division_code' => 'required',
-        ]);
-
-        if ($validator->fails())
-        {
-            $messages = '';
-            foreach ($validator->getMessageBag()->toArray() as $key => $value)
-            {
-                $messages .= $value[0] .' ';
-            }
-            return redirect()->back()->withDanger($messages);
-        }
+        $validator = $this->validator($request);
+        if ($validator['status'] == 'error') return redirect()->back()->withDanger($validator['message']);
 
         if ($request->password)
         {
@@ -109,19 +71,42 @@ class UserController extends Controller
                 ->update([
                     'name' => $request->name,
                     'email' => $request->email,
+                    'no_telp' => $request->no_telp,
+                    'username' => $request->username,
                     'password' => Hash::make($request->password),
                     'role' => $request->role,
-                    'division_code' => $request->division_code,
                 ]);
         }else{
             User::where('id', $id)
                 ->update([
                     'name' => $request->name,
                     'email' => $request->email,
+                    'no_telp' => $request->no_telp,
+                    'username' => $request->username,
                     'role' => $request->role,
-                    'division_code' => $request->division_code,
                 ]);
         }
-        return redirect()->route('pengguna.index')->withAlert('Data pengguna berhasil diperbarui');
+        return redirect()->route('user.index')->withAlert('Data berhasil diperbarui');
     }
+
+    public function validator ($request) {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|max:150',
+            'name' => 'required|max:255',
+            'password' => 'max:255',
+            'role' => 'required',
+        ]);
+
+        if ($validator->fails())
+        {
+            $messages = '';
+            foreach ($validator->getMessageBag()->toArray() as $key => $value)
+            {
+                $messages .= $value[0] .' ';
+            }
+            return ['status'=>'error', 'message'=>$messages];
+        }
+        return ['status'=>'success', 'message'=>'success'];
+    }
+
 }

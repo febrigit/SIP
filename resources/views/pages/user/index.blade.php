@@ -1,46 +1,59 @@
 @extends('layout')
-@section('pengguna')
+@section('user')
     active
 @endsection
 @section('header')
-    <link href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
     <div class="content">
         <div class="container-fluid">
-            <div class="row mb-3">
-                <div class="col-md-4"><h5 class="m-0">Daftar Pengguna</h5></div>
-                <div class="col-md-8"><a href="{{route('pengguna.create')}}" class="btn btn-primary float-right">Tambah Pengguna</a></div>
+            <div class="row mb-3 padding-xs">
+                <div class="col-md-6 col-sm-6 col-xs-6"><h5 class="m-0">Pengguna</h5></div>
+                <div class="col-md-6 col-sm-6 col-xs-6"><a href="{{route('user.create')}}" class="btn btn-primary float-right btn-md"><i class="fa fa-plus"></i>Tambah</a></div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-body table-responsive">
+                        <div class="card-body">
+                            <div class=" table-responsive table-responsive-sm">
                                 <table class="table compact hover" id="datatable">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <th width="30px">No</th>
+                                            <th width="50px">...</th>
                                             <th>Nama</th>
+                                            <th>Username</th>
+                                            <th>No Telp</th>
                                             <th>Email</th>
-                                            <th>Divisi</th>
                                             <th>Role</th>
-                                            <th>...</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($datas as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->name  }}</td>
-                                                <td>{{ $item->email  }}</td>
-                                                <td>{{ $item->division_code  }}</td>
-                                                <td>{{ $item->role  }}</td>
                                                 <td>
+
+                                                    <div class="btn-group">
+                                                        <button type="button " class="btn btn-outline-info btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="fa fa-ellipsis-vertical"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="{{ url('dashboard/user/'.$item->id.'') }}">Detail</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            <a class="dropdown-item" href="{{ url('dashboard/user/'.$item->id.'/edit') }}">Edit</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#delete{{$item->id}}">Hapus</a>
+                                                        </div>
+                                                      </div>
+
                                                     <div class="btn btn-group p-0">
-                                                        <a class="btn btn-warning btn-sm" href="{{ url('dashboard/division/'.$item->id.'/edit') }}">Edit</a>
-                                                        <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete{{$item->id}}">Hapus</a>
                                                     </div>
                                                 </td>
+                                                <td>{{ $item->username  }}</td>
+                                                <td>{{ $item->name  }}</td>
+                                                <td>{{ $item->no_telp  }}</td>
+                                                <td>{{ $item->email  }}</td>
+                                                <td>{{ $item->role  }}</td>
                                             </tr>
                                             <div class="modal fade" id="delete{{$item->id}}" role="dialog">
                                                 <div class="modal-dialog">
@@ -51,7 +64,7 @@
                                                         </div>
                                                         <div class="modal-body">Kamu yakin ingin menghapus pengguna ini?</div>
                                                         <div class="modal-footer">
-                                                            <form method="POST" action="{{url('dashboard/pengguna/'.$item->id)}}">
+                                                            <form method="POST" action="{{url('dashboard/user/'.$item->id)}}">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button  class="btn btn-danger">Ya</button>
@@ -64,6 +77,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                            </div>
 
                         </div>
                     </div>
@@ -73,13 +87,4 @@
     </div>
 @endsection
 @section('footer')
-    <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(function() {
-            $('#datatable').DataTable({
-                processing: true,
-                processing: true,
-            });
-        });
-    </script>
 @endsection

@@ -59,7 +59,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; PT Pendidikan Maritim dan Logistik Indonesia 2022</span>
+                    <span>Copyright &copy; Yayasan Pembangunan Citra Insan Indonesia 2023</span>
                 </div>
             </div>
         </footer>

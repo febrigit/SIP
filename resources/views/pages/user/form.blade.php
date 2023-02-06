@@ -1,5 +1,5 @@
 @extends('layout')
-@section('pengguna')
+@section('user')
     active
 @endsection
 @section('content')
@@ -12,14 +12,18 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row mb-3">
-                        <div class="col-md-4"><h5 class="m-0">{{ $mode }} Pengguna Baru</h5></div>
-                        <div class="col-md-8"><a href="{{route('pengguna.index')}}" class="btn btn-primary float-right">Daftar Pengguna</a></div>
+                        <div class="col-md-4 padding-xs">
+                            <h5 class="m-0">
+                                <a href="{{route('user.index')}}" class="loat-left"><i class="fa fa-arrow-left mr-2"></i></a>
+                                {{ $mode }} Pengguna Baru
+                            </h5>
+                        </div>
                     </div>
                     <div class="card mb-5">
                         @if (!$data->id)
-                            <form method="post" action="{{route('pengguna.store')}}">
+                            <form method="post" action="{{route('user.store')}}">
                         @else
-                            <form method="post" action="{{url('dashboard/pengguna/'.$data->id)}}">
+                            <form method="post" action="{{url('dashboard/user/'.$data->id)}}">
                             @method('PUT')
                         @endif
                         @csrf
@@ -37,30 +41,34 @@
                                         <input type="email" class="form-control" name="email"  value="{{ $data->email }}">
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-3">
                                     <div class="form-group">
-                                        <label>Division <span class="text-danger">*</span></label>
-                                        <select name="division_code" class="form-control">
-                                            <option value=""></option>
-                                            @foreach ($division as $divisi) 
-                                            <option value="{{$divisi->code}}" {{ $data->code == $divisi->code ? 'selected' : '' }}>{{$divisi->name}}</option>
-                                            @endforeach
-                                        </select>
+                                        <label>No Telp <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="no_telp"  value="{{ $data->no_telp }}">
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-3">
                                     <div class="form-group">
                                         <label>Role <span class="text-danger">*</span></label>
                                         <select name="role" class="form-control">
                                             <option value=""></option>
-                                            <option value="ADMIN">ADMIN</option>
-                                            <option value="AUDITEE">AUDITEE</option>
-                                            <option value="AUDITOR">AUDITOR</option>
-                                            <option value="AUDITOR PUSAT">AUDITOR PUSAT</option>
+                                            <option value="SUPERADMIN" @if($data->role=='SUPERADMIN') selected @endif>SUPERADMIN</option>
+                                            <option value="ADMIN" @if($data->role=='ADMIN') selected @endif>ADMIN</option>
+                                            <option value="STAFF" @if($data->role=='STAFF') selected @endif>STAFF</option>
+                                            <option value="PROJECT MANAGER" @if($data->role=='PROJECT MANAGER') selected @endif>PROJECT MANAGER</option>
+                                            <option value="PURCHASING" @if($data->role=='PURCHASING') selected @endif>PURCHASING</option>
+                                            <option value="FINANCE" @if($data->role=='FINANCE') selected @endif>FINANCE</option>
+                                            <option value="FINANCE MANAGER" @if($data->role=='FINANCE MANAGER') selected @endif>FINANCE MANAGER</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group">
+                                        <label>Username <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="username"  value="{{ $data->username }}">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
                                     <div class="form-group">
                                         <label>Password <span class="text-danger">*</span></label>
                                         <input type="password" class="form-control" name="password">

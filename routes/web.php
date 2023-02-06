@@ -21,7 +21,10 @@ Route::get('logout', 'IndexController@logout');
 Route::prefix('dashboard')->middleware('admin')->group(function(){
     Route::get('/', 'IndexController@dashboard')->name('dashboard');
 
-    Route::resource('/pengguna', 'UserController');
-    Route::resource('/division', 'DivisionController');
+    Route::resource('/user', 'UserController');
+    Route::resource('/funding', 'FundingController');
+    Route::resource('/coa', 'CoaController');
+    Route::resource('/bank-account', 'BankAccountController');
+    Route::resource('/program', 'ProgramController');
     // Route::get('/get-pengguna', 'UserController@get_pengguna')->name('get.pengguna');
 });

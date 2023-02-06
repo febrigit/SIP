@@ -21,12 +21,9 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <img src="{{asset('img/new-logo-pmli.png')}}" height="30" width="70">
-                                    </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-12">
                                         <div class="text-left">
-                                            <h1 class="h5 text-gray-900 mb-4">E-AUDIT<br>PELINDO PEMBELAJARAN & KONSULTASI</h1>
+                                            <h1 class="h5 text-gray-900 mb-4">PROJECT MANAGEMENT PLAN <hr> <small>Login</</h1>
                                         </div>
                                     </div>
                                 </div>
@@ -54,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <span>Copyright &copy; PT Pendidikan Maritim dan Logistik Indonesia 2022</span>
+        <span>Copyright &copy; Yayasan Pembangunan Citra Insan Indonesia 2023</span>
     </div>
 
 </div>

@@ -11,7 +11,7 @@
                         <div class="col-md-4 padding-xs">
                             <h5 class="m-0">
                                 <a href="{{route('user.index')}}" class="loat-left"><i class="fa fa-arrow-left mr-2"></i></a>
-                                Detail Pengguna
+                                Detail User
                             </h5>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                                     <div class="table-responsive">
                                         <table class="table compact">
                                             <tr>
-                                                <td>Nama</td>
+                                                <td>Name</td>
                                                 <td>:</td>
                                                 <td>{{ $data->name }}</td>
                                             </tr>
@@ -32,19 +32,9 @@
                                                 <td>{{ $data->email }}</td>
                                             </tr>
                                             <tr>
-                                                <td>No Telp</td>
-                                                <td>:</td>
-                                                <td>{{ $data->no_telp }}</td>
-                                            </tr>
-                                            <tr>
                                                 <td>Role</td>
                                                 <td>:</td>
                                                 <td>{{ $data->role }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jabatan</td>
-                                                <td>:</td>
-                                                <td>{{ $data->jabatan }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Username</td>

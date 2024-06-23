@@ -12,46 +12,46 @@
     <!-- Outer Row -->
     <div class="row justify-content-center">
 
-        <div class="col-xl-10 col-lg-12 col-md-9">
+        <div class="col-12 col-md-6 p-0 mt-5">
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                        <div class="col-lg-6">
+                        <div class="col-12">
                             <div class="p-5">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="text-left">
-                                            <h1 class="h5 text-gray-900 mb-4">PROJECT MANAGEMENT PLAN <hr> <small>Login</</h1>
+                                            <h1 class="h5 text-gray-900 mb-4">SIGOEDANG <hr> <small>Login</</h1>
                                         </div>
                                     </div>
                                 </div>
                                 <form method="post" action="{{url('login')}}" class="user">
+                                    @if (session('notif'))
+                                        <div class="alert alert-warning">
+                                            {{ session('notif') }}
+                                        </div>
+                                    @endif
                                     @csrf
                                     <div class="form-group">
-                                        <input type="email" name="email" class="form-control form-control-user" placeholder="Masukan Akun Email">
+                                        <input type="text" name="username" class="form-control form-control-user" placeholder="Username">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" class="form-control form-control-user" placeholder="Password">
+                                        <input type="password" name="password" class="form-control form-control-user" placeholder="">
                                     </div>
+                                    
                                     <button class="btn btn-primary btn-user btn-block">
                                         Login
                                     </button>
                                 </form>
-
-                                @if (session('notif'))
-                                    <div class="alert alert-warning mt-3">
-                                        {{ session('notif') }}
-                                    </div>
-                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="text-center">Copyright &copy; SIGOEDANG</div>
         </div>
-        <span>Copyright &copy; Yayasan Pembangunan Citra Insan Indonesia 2023</span>
     </div>
 
 </div>

@@ -1,8 +1,8 @@
 @extends('layout')
 @php
-    $metaModule = 'user';
+    $metaModule = 'article';
 @endphp
-@section('user')
+@section($metaModule)
     active
 @endsection
 @section('header')
@@ -11,7 +11,7 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row mb-3 padding-xs">
-                <div class="col-md-6 col-sm-6 col-xs-6"><h5 class="m-0">User</h5></div>
+                <div class="col-md-6 col-sm-6 col-xs-6"><h5 class="m-0">{{ App\Helpers::kebabToTitle($metaModule) }}</h5></div>
                 @if(\App\Helpers::checkPermission('create-'.$metaModule))<div class="col-md-6 col-sm-6 col-xs-6"><a href="{{route($metaModule.'.create')}}" class="btn btn-primary float-right btn-md btn-rounded"><i class="fa fa-plus"></i> Add</a></div>@endif
             </div>
             @if(\App\Helpers::checkPermission('read-'.$metaModule))
@@ -26,9 +26,8 @@
                                             <th width="30px">No</th>
                                             <th width="50px">...</th>
                                             <th>Name</th>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
+                                            <th>Category</th>
+                                            <th>By</th>
                                             <th width="35px">Log</th>
                                         </tr>
                                     </thead>
@@ -52,15 +51,13 @@
                                                     <div class="btn btn-group p-0">
                                                     </div>
                                                 </td>
-                                                <td>{{ $item->name  }}</td>
-                                                <td>{{ $item->username  }}</td>
-                                                <td>{{ $item->email  }}</td>
-                                                <td>{{ $item->role->name  }}</td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->category->name }}</td>
+                                                <td>{{ $item->user->name }}</td>
                                                 <td>@include('libs.logs', ['data' => $item])</td>
                                             </tr>
                                             <div class="modal fade" id="delete{{$item->id}}" role="dialog">
                                                 <div class="modal-dialog">
-                                                    <!-- Modal content-->
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h4 class="modal-title">Delete data "{{$item->name}}"</h4>
@@ -87,7 +84,7 @@
                 </div>
             </div>
             @endif
-        </div><!-- /.container-fluid -->
+        </div>
     </div>
 @endsection
 @section('footer')

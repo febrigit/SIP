@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use DB;
 use Auth;
+use App\Model\Role;
 
 class User extends Authenticatable
 {
@@ -39,4 +40,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+    public function createdBy() {
+        return $this->hasOne(User::class, 'id', 'created_by')->withTrashed();
+    }
+
+    public function updatedBy() {
+        return $this->hasOne(User::class, 'id', 'updated_by')->withTrashed();
+    }
+
+    public function deletedBy() {
+        return $this->hasOne(User::class, 'id', 'deleted_by')->withTrashed();
+    }
+
+    public function role() {
+        return $this->hasOne(Role::class, 'id', 'role_id')->withTrashed();
+    }
 }

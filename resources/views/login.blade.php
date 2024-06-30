@@ -22,7 +22,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="text-left">
-                                            <h1 class="h5 text-gray-900 mb-4">SIGOEDANG <hr> <small>Login</</h1>
+                                            <h1 class="h5 text-gray-900 mb-4">SIP <hr> <small>Login</</h1>
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-            <div class="text-center">Copyright &copy; SIGOEDANG</div>
+            <div class="text-center">Copyright &copy; SIP</div>
         </div>
     </div>
 

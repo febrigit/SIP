@@ -1,4 +1,7 @@
 @extends('layout')
+@php
+    $metaModule = 'user';
+@endphp
 @section('user')
     active
 @endsection
@@ -14,16 +17,16 @@
                     <div class="row mb-3">
                         <div class="col-md-4 padding-xs">
                             <h5 class="m-0">
-                                <a href="{{route('user.index')}}" class="loat-left"><i class="fa fa-arrow-left mr-2"></i></a>
+                                <a href="{{route($metaModule.'.index')}}" class="loat-left"><i class="fa fa-arrow-left mr-2"></i></a>
                                 {{ $mode }} User
                             </h5>
                         </div>
                     </div>
                     <div class="card mb-5">
                         @if (!$data->id)
-                            <form method="post" action="{{route('user.store')}}">
+                            <form method="post" action="{{route($metaModule.'.store')}}">
                         @else
-                            <form method="post" action="{{url('user/'.$data->id)}}">
+                            <form method="post" action="{{url($metaModule.'/'.$data->id)}}">
                             @method('PUT')
                         @endif
                         @csrf
@@ -44,9 +47,10 @@
                                 <div class="col-12 col-md-4">
                                     <div class="form-group">
                                         <label>Role <span class="text-danger">*</span></label>
-                                        <select name="role" class="form-control">
-                                            <option value="SUPERADMIN" @if($data->role=='SUPERADMIN') selected @endif>SUPERADMIN</option>
-                                            <option value="ADMIN" @if($data->role=='ADMIN') selected @endif>ADMIN</option>
+                                        <select name="role_id" class="form-control" required>
+                                            @foreach ($roles as $val)
+                                                <option value="{{$val->id}}" @if($data->role_id == $val->id) selected @endif>{{ $val->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -68,7 +72,9 @@
                             </div>
                         </div>
                         <div class="card-footer pb-5">
+                            @if(\App\Helpers::checkPermission('create-'.$metaModule) || \App\Helpers::checkPermission('update-'.$metaModule))
                             <button class="btn btn-success float-right"><i class="fa fa-check"></i> {{ $btnLbl }}</button>
+                            @endif
                         </div>
                         </form>
                     </div>
